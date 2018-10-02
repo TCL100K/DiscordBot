@@ -28,6 +28,7 @@ module.exports = {
         this.commandInstances.bot = this.bot
         this.commandInstances.sendMessage = this.sendMessage
         this.commandInstances.data = data
+        this.commandInstances.initialize()
     },
 
     sendMessage(msg) {

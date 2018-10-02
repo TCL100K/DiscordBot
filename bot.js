@@ -56,6 +56,10 @@ bot.on('message', (user, userId, chanellId, message, event) => {
     let commandLine = message.substring(2, message.length)
     let parsedCommandLine = commandLine.split(" ")
     let command = parsedCommandLine[0]
+    let wrongCommands = ['initialize', 'bot', 'sendMessage', 'data']
+
+    if(wrongCommands.find((element) => { return element === command }) !== undefined)
+        return
 
     // Pass the message info to command runner
     commandRunner.setMessageInfo(userId, chanellId)
