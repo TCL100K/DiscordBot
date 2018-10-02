@@ -1,3 +1,8 @@
+/**
+ * File that contains all commands.
+ * To add a command, just add a function to the object with the same name of the command.
+ */
+
 module.exports = {
     help(args) {
         if(args.length > 0) {
