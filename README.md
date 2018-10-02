@@ -1,5 +1,5 @@
 # DiscordBot
-Simple Discord Bot for My Server
+Simple Discord Bot for Your Server
 
 ## Requirements
 
