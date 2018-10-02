@@ -1,16 +1,14 @@
-exports.default = {
+module.exports = {
     bot: null,
     commandInstances: {},
 
-    initialize(bot, data) {
+    initialize(bot) {
         this.bot = bot
-        this.commandInstances.data = data
-        this.commandInstances.sendMessage = this.sendMessage
     },
 
     setMessageInfo(userId, chanellId) {
-        this.userId = userId
-        this.chanellId = chanellId
+        this.commandInstances.userId = userId
+        this.commandInstances.chanellId = chanellId
     },
 
     commandExists(command) {
@@ -25,8 +23,11 @@ exports.default = {
         }
     },
 
-    addCommands(commands) {
+    addCommands(commands, data) {
         this.commandInstances = commands
+        this.commandInstances.bot = this.bot
+        this.commandInstances.sendMessage = this.sendMessage
+        this.commandInstances.data = data
     },
 
     sendMessage(msg) {

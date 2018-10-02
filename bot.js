@@ -27,8 +27,8 @@ bot.on('ready', (event) => {
     logger.info('Logged in as: ')
     logger.info(bot.username + '.(' + bot.id + ')')
 
-    commandRunner.initialize(bot, data)
-    commandRunner.addCommands(commands)
+    commandRunner.initialize(bot)
+    commandRunner.addCommands(commands, data)
 })
 
 bot.on('message', (user, userId, chanellId, message, event) => {
@@ -47,6 +47,7 @@ bot.on('message', (user, userId, chanellId, message, event) => {
     commandRunner.setMessageInfo(userId, chanellId)
     
     try {
+        parsedCommandLine.shift()
         commandRunner.run(command, parsedCommandLine)
     } catch(e) {
         console.error(e)
