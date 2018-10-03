@@ -5,7 +5,18 @@
 
 module.exports = {
     initialize() {
+        this.data.config = {
+            testValue: 324
+        }
+
         this.data.helpInfo = {
+            'config': {
+                description: 'Obtiene o cambia la configuracion del bot',
+                args: {
+                    'configName': 'Nombre de la configuracion',
+                    'configValue': 'Valor de la configuracion'
+                }
+            },
             'say': {
                 description: 'The bot repeats',
                 args: {
@@ -41,6 +52,35 @@ module.exports = {
             message += '\n' + key + ': ' + this.data.helpInfo[key].description
 
         this.sendMessage(message)
+    },
+
+    config(args) {
+        if(args.length < 1) {
+            let message = '\`\`\`json\n' + JSON.stringify(this.data.config) + '\`\`\`'
+            this.sendMessage(message)
+        } else if(args.length === 1) {
+            let configName = args[0]
+
+            if(this.data.config.hasOwnProperty(configName)) {
+                let message = '\`\`\`json\n' + JSON.stringify(this.data.config[configName]) + '\`\`\`'
+                this.sendMessage(message)
+            } else {
+                this.sendMessage('Config not exists')
+            }
+        } else if(args.length > 1) {
+            let configName = args[0]
+            let configValue = args[1]
+
+            configValue = parseFloat(configValue)
+
+            if(this.data.config.hasOwnProperty(configName)) {
+                this.data.config[configName] = configValue
+                let message = '\`\`\`json\n' + JSON.stringify(this.data.config[configName]) + '\`\`\`'
+                this.sendMessage(message)
+            } else {
+                this.sendMessage('Config not exists')
+            }
+        }
     },
 
     say(args) {
