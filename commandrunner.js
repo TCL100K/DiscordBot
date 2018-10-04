@@ -31,10 +31,18 @@ module.exports = {
         this.commandInstances.initialize()
     },
 
-    sendMessage(msg) {
+    sendMessage(msg, fields = []) {
         this.bot.sendMessage({
             to: this.chanellId,
-            message: msg
+            message: '',
+            embed: {
+                color: 3447003,
+                author: {
+                    name: 'TCL_BOT',
+                },
+                title: msg,
+                fields: fields,
+            }
         })
     }
 }

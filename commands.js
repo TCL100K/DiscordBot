@@ -32,26 +32,39 @@ module.exports = {
 
             let helpInfo = this.data.helpInfo[args[0]]
             let message = 'Usage: t!' + args[0]
-            let messageEnd = '\n'
+            let fields = []
 
             for(let key in helpInfo.args) {
                 message += ' [' + key + ']'
-                messageEnd += '\n' + key + ': ' + helpInfo.args[key]
+
+                fields.push({
+                    name: key,
+                    value: helpInfo.args[key]
+                })
             }
 
-            message += messageEnd
-
-            this.sendMessage(message)
+            this.sendMessage(message, fields)
 
             return
         }
 
         let message = 'List of commands:\n'
+        let fields = []
 
-        for(var key in this.data.helpInfo)
-            message += '\n' + key + ': ' + this.data.helpInfo[key].description
+        for(var key in this.data.helpInfo) {
+            let helpInfo = this.data.helpInfo[key];
+            let usage = 't!' + key
 
-        this.sendMessage(message)
+            for(let arg in helpInfo.args)
+                usage += ' [' + key + ']'
+
+            fields.push({
+                name: usage,
+                value: helpInfo.description
+            })
+        }
+
+        this.sendMessage(message, fields)
     },
 
     config(args) {
