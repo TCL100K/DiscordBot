@@ -56,7 +56,7 @@ module.exports = {
             let usage = 't!' + key
 
             for(let arg in helpInfo.args)
-                usage += ' [' + key + ']'
+                usage += ' [' + arg + ']'
 
             fields.push({
                 name: usage,
